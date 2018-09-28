@@ -1,3 +1,26 @@
+/*
+// EXAMPLE
+
+var objectA = {
+    property1: 'test'
+};
+
+objectA.self = objectA;
+
+hasCircular(objectA);
+
+var objectB = {
+    property1: 'test',
+    property2 : {
+    }
+};
+
+objectB.property2.self = objectB;
+
+hasCircular(objectB);
+
+*/
+
 function hasCircular(o, visited = []) {
     for(let key of Object.keys(o)) {
         if(typeof o[key] === 'object') {
@@ -8,7 +31,7 @@ function hasCircular(o, visited = []) {
 
             visited.push(o[key]);
 
-            isInfinite(o[key], visited);
+            hasCircular(o[key], visited);
         }
     }
 }
